@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Input = ({ label, name, id, type, value, setValue, erro = "Falha ao preencher", ...props }) => {
+const Input = ({ label, name, id, type, value, setValue, error, ...props }) => {
+  // onBlur está sendo passado pelas ...props
   return (
     <div className="my-5">
       <label 
@@ -20,7 +21,7 @@ const Input = ({ label, name, id, type, value, setValue, erro = "Falha ao preenc
         onChange={({ target}) => setValue(target.value)} 
         {...props}
       />
-      {erro && <p className="text-red-600 mt-2 text-md">{erro}</p>}
+      {error && <p className="text-red-600 mt-2 text-md">{error}</p>}
     </div>
   )
 }

@@ -3,18 +3,23 @@ import { Link } from 'react-router-dom';
 import useUserLogin from '../../hooks/auth/useUserLogin';
 import Button from './form/button/Button';
 import Input from './form/input/Input';
+import useForm from '../../hooks/form/useForm';
+import useUserGet from '../../hooks/auth/useUserGet';
+import { UserContext } from '../../global/UserContext';
 
 const LoginForm = () => {
-  const [user, setUser] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const user = useForm("user");
+  const password = useForm("password");
   const [token, setToken] = React.useState('');
-  const { mutate } = useUserLogin(setToken);
+  const { mutation, fail: loginFail } = useUserLogin(setToken); // loginMutate recebe mutate
 
-  function onSubmit(event) {
+  async function onSubmit(event) {
     event.preventDefault();
-    const credentials = { username: user, password }; // ATENÇÃO: A API recebe username e password, portanto atenção ao passar as credenciais
+    const credentials = { username: user.value, password: password.value }; // ATENÇÃO: A API recebe username e password, portanto atenção ao passar as credenciais
     // deve ser o mesmo nome
-    mutate(credentials);
+    if(user.validate() && password.validate()) {
+      mutation({ credentials });
+    }
   }
   return (
     <section>
@@ -24,25 +29,35 @@ const LoginForm = () => {
           label="Usuário: " 
           type="text"
           name="user" 
-          value={user} 
-          onChange={({ target }) => setUser(target.value)} 
-          placeholder="Seu usuário" 
+          value={user.value} 
+          onChange={user.onChange}
+          onBlur={user.onBlur}
+          placeholder="Seu usuário"
+          error={user.error}
         />
         <Input 
           label="Senha: " 
           type="password" 
           name="password" 
-          value={password} 
-          onChange={({ target }) => setPassword(target.value)} 
-          placeholder="Sua senha" 
+          value={password.value} 
+          onChange={password.onChange}
+          onBlur={password.onBlur}
+          placeholder="Sua senha"
+          error={password.error}
         />
+        {loginFail && <p className="text-xl text-red-600">Usuário e/ou senha inválidos</p>}
         <Button 
           type="submit"
         >
           Entrar
         </Button>
+        <Link 
+        to="cadastro"
+        className="px-5 py-2 bg-green-500 mt-5 ml-5 rounded text-green-900 hover:opacity-70 duration-200"
+        >
+          Cadastre-se
+        </Link>
       </form>
-      <Link to="cadastro">Cadastre-se</Link>
     </section>
   )
 }
