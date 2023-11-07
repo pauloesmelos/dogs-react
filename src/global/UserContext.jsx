@@ -10,7 +10,6 @@ export const UserContextProvider = ({ children }) => {
     const [isLogin, setIsLogin] = React.useState(false);
     const navigate = useNavigate();
     const { data, isError, isLoading } = useUserGet(token); // user
-    const { mutate: validateToken } = userTokenValidate();
 
     React.useEffect(() => {
         const token = window.localStorage.getItem("token");
@@ -18,6 +17,9 @@ export const UserContextProvider = ({ children }) => {
             setToken(token);
             setIsLogin(true);
             console.log("valido");
+        }
+        else {
+            setIsLogin(false);
         }
     }, []);
     React.useEffect(() => {

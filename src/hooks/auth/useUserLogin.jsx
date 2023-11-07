@@ -4,9 +4,8 @@ import { useMutation } from 'react-query';
 import URL from '../../URL';
 import { UserContext } from '../../global/UserContext';
 
-const authUser = async (values) => {
-    const { credentials } = values; // p desestruturas, usar o msm nome onde é passado os param
-    return await axios.post(`${URL}jwt-auth/v1/token`, credentials, {
+const authUser = async (body) => {
+    return await axios.post(`${URL}jwt-auth/v1/token`, body, {
         headers: {
             "Content-Type": "application/json"
         }

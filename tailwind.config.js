@@ -14,10 +14,16 @@ export default {
       toLeft: {
         "from": { transform: "translate3d(-5rem,0,0)" },
         "to": { transform: "translate3d(0,0,0)" }
+      },
+      ping: {
+        "0%": { transform: "translate3d(0,0,0)" },
+        "50%": { transform: "translate3d(0,-0.5rem,0)" },
+        "100%": { transform: "translate3d(0,0,0)" }
       }
     },
     animation: {
-      toLeft: "toLeft .3s forwards"
+      toLeft: "toLeft .3s forwards",
+      ping: "ping 1.5s infinite"
     }
   },
   plugins: [],

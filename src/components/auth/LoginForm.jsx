@@ -18,7 +18,7 @@ const LoginForm = () => {
     const credentials = { username: user.value, password: password.value }; // ATENÇÃO: A API recebe username e password, portanto atenção ao passar as credenciais
     // deve ser o mesmo nome
     if(user.validate() && password.validate()) {
-      mutation({ credentials });
+      mutation(credentials);
     }
   }
   return (
