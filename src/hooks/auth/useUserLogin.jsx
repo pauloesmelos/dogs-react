@@ -1,5 +1,5 @@
-import React from 'react';
 import axios from 'axios';
+import React from 'react';
 import { useMutation } from 'react-query';
 import URL from '../../URL';
 import { UserContext } from '../../global/UserContext';
@@ -15,6 +15,7 @@ const authUser = async (values) => {
 }
 const useUserLogin = (setToken) => {
   const [fail, setFail] = React.useState(null);
+  const { navigate } = React.useContext(UserContext);
 
   const { mutate: mutation } = useMutation({
     mutationFn: authUser,
@@ -23,6 +24,7 @@ const useUserLogin = (setToken) => {
       setToken(data.token);
       setFail("");
       window.localStorage.setItem("token", data.token);
+      navigate("/conta");
       location.reload();
     },
     onError: () => {

@@ -21,7 +21,7 @@ const Input = ({ label, name, id, type, value, setValue, error, ...props }) => {
         onChange={({ target}) => setValue(target.value)} 
         {...props}
       />
-      {error && <p className="text-red-600 mt-2 text-md">{error}</p>}
+      {error && <p className="text-red-600 mt-2 text-xl">{error}</p>}
     </div>
   )
 }

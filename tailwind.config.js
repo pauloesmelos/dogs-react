@@ -10,6 +10,15 @@ export default {
         "spectral": ['Spectral', 'serif']
       }
     },
+    keyframes: {
+      toLeft: {
+        "from": { transform: "translate3d(-5rem,0,0)" },
+        "to": { transform: "translate3d(0,0,0)" }
+      }
+    },
+    animation: {
+      toLeft: "toLeft .3s forwards"
+    }
   },
   plugins: [],
 }
