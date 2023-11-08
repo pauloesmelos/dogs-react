@@ -1,8 +1,11 @@
 import React from 'react';
+import Form from './(component)/Form';
 
 const UserPhotoPost = () => {
   return (
-    <div>UserPhotoPost</div>
+    <section className="animate-toLeft pt-10">
+      <Form />
+    </section>
   )
 }
 

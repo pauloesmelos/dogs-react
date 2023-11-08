@@ -1,9 +1,10 @@
 import React from 'react';
+import Feed from './feed/Feed';
 
 const Home = () => {
   return (
     <div className="pt-16">
-      <h1>Home</h1>
+      <Feed />
     </div>
   )
 }
