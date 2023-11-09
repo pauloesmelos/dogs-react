@@ -11,12 +11,16 @@ const getUser = async (token) => {
             }
         })
         .then(response => response.data)
+        .catch(erro => {
+          console.log("erro: " + erro);
+          window.localStorage.removeItem("token");
+        })
     }
 }
 
 const useUserGet = (token) => {
   const query = useQuery(["get-user"], () => getUser(token), {
-    enabled: !!token, // impede a chamada caso token seja null/false
+    enabled: !!token // impede a chamada caso token seja null/false
   });
   return query;
 }

@@ -1,10 +1,8 @@
-import axios from 'axios'
-import React from 'react'
+import axios from 'axios';
 import { useQuery } from 'react-query';
 import URL from '../../URL';
 
 const getPhotos = async (page, total, user) => {
-    console.log(page,total,user);
     return await axios.get(`${URL}api/photo/?_page=${page}&_total=${total}&_user=${user}`)
     .then(response => response.data);
 }
