@@ -2,7 +2,7 @@ import React from 'react';
 import FeedPhotosItem from './FeedPhotosItem';
 import useUserPhotoGet from '../../hooks/auth/useUserPhotoGet';
 
-const FeedPhotos = ({ photo, setModalImage }) => {
+const FeedPhotos = ({ setModalImage }) => {
   const { photos, loading } = useUserPhotoGet(1,10,0)
 
   if(loading) return <p>Carregando...</p>

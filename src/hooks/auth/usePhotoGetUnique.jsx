@@ -1,21 +1,26 @@
 import axios from 'axios';
-import React from 'react';
 import URL from '../../URL';
-import { useQuery } from 'react-query';
+import { useQuery } from 'react-query'; // queryCache
 
 const getPhotoUnique = async (id) => {
-    return axios.get(`${URL}api/photo/${id}`)
-    .then(response => response);
+    if(id) {
+      return await axios.get(`${URL}api/photo/${id}`
+      )
+      .then(response => response.data);
+    }
+}
+
+const refetch = async () => {
+  
 }
 
 const usePhotoGetUnique = (id) => {
-  const query = useQuery(["get-unique-photo"], () => {
-    getPhotoUnique(id)
-  }, {
-    enabled: !!id // estudar o funcionamento do enabled
+  const { data: photoUnique } = useQuery(["get-unique-photo"],  () => {
+    return getPhotoUnique(id); // sem o return a query retorna undefined
   }
   );
-  return query;
+
+  return { photoUnique, refetch };
 }
 
 export default usePhotoGetUnique;
